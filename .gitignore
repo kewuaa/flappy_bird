@@ -1,0 +1,9 @@
+.cache
+/build*
+/subprojects/*
+!/subprojects/*.wrap
+!/subprojects/packagefiles
+/resource/*
+!/resource/*.ttf
+!/resource/*.png
+/dist

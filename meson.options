@@ -1,0 +1,1 @@
+option('static_link_raylib', type: 'boolean', value: false, description: 'if to use static link for raylib')

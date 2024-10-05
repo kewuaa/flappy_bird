@@ -1,0 +1,3 @@
+#define GAME_FPS 60
+#define GAME_WIDTH 480
+#define GAME_HEIGHT 600

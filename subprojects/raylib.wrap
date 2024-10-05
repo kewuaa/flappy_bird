@@ -1,0 +1,8 @@
+[wrap-file]
+directory = raylib-5.0
+source_filename = raylib-5.0.tar.gz
+source_url = https://github.com/raysan5/raylib/archive/refs/tags/5.0.tar.gz
+source_hash = 98f049b9ea2a9c40a14e4e543eeea1a7ec3090ebdcd329c4ca2cf98bc9793482
+
+[provide]
+raylib = raylib_dep
