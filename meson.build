@@ -8,6 +8,8 @@ project(
   ]
 )
 
+system = host_machine.system()
+
 raylib_dep = dependency('raylib', required: false, allow_fallback: false)
 static_link_raylib = get_option('static_link_raylib')
 if static_link_raylib or not raylib_dep.found()
@@ -19,11 +21,16 @@ if static_link_raylib or not raylib_dep.found()
     'CMAKE_BUILD_TYPE': 'release',
   })
   raylib = cmake.subproject('raylib', options: raylib_opts)
+  dependencies = [
+    raylib.dependency('raylib'),
+    raylib.dependency('glfw')
+  ]
+  cc = meson.get_compiler('c')
+  if system == 'windows'
+    dependencies += cc.find_library('winmm', required: true)
+  endif
   raylib_dep = declare_dependency(
-    dependencies: [
-      raylib.dependency('raylib'),
-      raylib.dependency('glfw')
-    ]
+    dependencies: dependencies
   )
 endif
 
