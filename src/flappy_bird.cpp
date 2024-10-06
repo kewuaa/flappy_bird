@@ -147,7 +147,7 @@ class Pillar {
                     pipe_list.pop_front();
                     score += 1;
                     if (score % 10 == 0) {
-                        v += 0.5;
+                        v *= 1.2;
                     }
                 } else {
                     break;
