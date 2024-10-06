@@ -112,9 +112,9 @@ class Pillar {
         std::deque<Pipe> pipe_list;
         double v {INIT_V};
         std::mt19937 engine;
-        std::uniform_int_distribution<> dist;
 
         void new_pillar() {
+            static std::uniform_int_distribution<> dist {MIN_HEIGHT, MAX_HEIGHT};
             auto v = dist(engine) % 2;
             auto height = dist(engine);
             if (v) {
@@ -124,17 +124,12 @@ class Pillar {
             }
         }
     public:
-        Pillar() {
+        Pillar(): engine {std::random_device()()} {
             auto path = "resource/pillar.png";
             auto img = LoadImage(path);
             ImageResize(&img, WIDTH, MAX_HEIGHT);
             texture = LoadTextureFromImage(img);
             UnloadImage(img);
-
-            std::random_device device;
-            engine = std::mt19937(device());
-            dist = std::uniform_int_distribution<>(MIN_HEIGHT, MAX_HEIGHT);
-
             new_pillar();
         }
 
@@ -158,10 +153,12 @@ class Pillar {
                     break;
                 }
             }
-            static double space = Bird::SIZE * 1.5;
+
+            static std::uniform_real_distribution<> dist {1.3, 2.};
+            static double space = dist(engine) * Bird::SIZE;
             if (pipe_list.back().x < GAME_WIDTH - WIDTH - space) {
                 new_pillar();
-                space = ((double)dist(engine) / MAX_HEIGHT) * 2 * Bird::SIZE;
+                space = dist(engine) * Bird::SIZE;
             }
         }
 
