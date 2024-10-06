@@ -291,6 +291,7 @@ int main() {
             DrawTexture(bg, 0, 0, WHITE);
             pillar.draw();
             bird.draw();
+            draw_score(font, 30);
             switch (game_status) {
                 case GameStatus::PENDING: {
                     draw_center(
@@ -320,7 +321,6 @@ int main() {
                     break;
                 }
                 default: {
-                    draw_score(font, 30);
                     break;
                 }
             }
