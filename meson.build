@@ -10,14 +10,13 @@ project(
 
 raylib_dep = dependency('raylib', required: false, allow_fallback: false)
 static_link_raylib = get_option('static_link_raylib')
-if not raylib_dep.found() or static_link_raylib
+if static_link_raylib or not raylib_dep.found()
   cmake = import('cmake')
   raylib_opts = cmake.subproject_options()
   raylib_opts.add_cmake_defines({
     'BUILD_EXAMPLES': false,
     'BUILD_SHARED_LIBS': not static_link_raylib,
     'CMAKE_BUILD_TYPE': 'release',
-    'GLFW_BUILD_WAYLAND': run_command('sh', '-c', 'echo $WAYLAND_DISPLAY').stdout() != ''
   })
   raylib = cmake.subproject('raylib', options: raylib_opts)
   raylib_dep = declare_dependency(
@@ -35,7 +34,6 @@ flappy_bird = executable(
   install: true,
   install_dir: '.'
 )
-install_data('resource/background.bmp')
 
 test(
   'test_flappy_bird',
