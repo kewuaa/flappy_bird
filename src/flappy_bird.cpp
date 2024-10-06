@@ -311,8 +311,8 @@ int main() {
                     draw_center(
                         {
                             "Game Over",
-                            "press <SPACE> to continue",
-                            "press <Q> to quit"
+                            "<SPACE> -> continue",
+                            "<Q> -> quit"
                         },
                         font,
                         30,
